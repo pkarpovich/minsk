@@ -14,5 +14,9 @@ module.exports = override(
         },
       },
     ],
+  }),
+  addWebpackModuleRule({
+    test: /\.svg$/,
+    use: ["@svgr/webpack"],
   })
 );

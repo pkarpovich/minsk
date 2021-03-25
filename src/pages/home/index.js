@@ -1,5 +1,10 @@
+/* eslint-disable no-use-before-define */
+
 import { memo } from "react";
 import { styled } from "@linaria/react";
+import { Link } from "wouter";
+
+import { GalleryTypes } from "constants/gallery-types";
 
 import bgLeft from "static/wp2307392.jpeg";
 import bgRight from "static/minsk106_v-fullhd.jpeg";
@@ -8,13 +13,13 @@ const Home = () => {
   return (
     <s.Container>
       <s.LinkContainer>
-        <s.Label>Минск</s.Label>
+        <s.Label href={""}>Минск</s.Label>
       </s.LinkContainer>
       <s.Img bg={`url(${bgLeft})`} width={65} isLeft={true}>
-        <s.Label>Вчера</s.Label>
+        <s.Label href={`/gallery/${GalleryTypes.YESTERDAY}`}>Вчера</s.Label>
       </s.Img>
       <s.Img bg={`url(${bgRight})`} width={65} left={35} isLeft={false}>
-        <s.Label>Сегодня</s.Label>
+        <s.Label href={`/gallery/${GalleryTypes.TODAY}`}>Сегодня</s.Label>
       </s.Img>
     </s.Container>
   );
@@ -29,7 +34,7 @@ const s = {
     justify-content: space-between;
     overflow: hidden;
   `,
-  Label: styled.span`
+  Label: styled(Link)`
     font-size: 3rem;
     color: #fff;
     text-shadow: 2px 2px 4px #000000;

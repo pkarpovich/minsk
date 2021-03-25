@@ -2125,7 +2125,7 @@
     deepmerge "^4.2.2"
     svgo "^1.2.2"
 
-"@svgr/webpack@5.5.0":
+"@svgr/webpack@5.5.0", "@svgr/webpack@^5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@svgr/webpack/-/webpack-5.5.0.tgz#aae858ee579f5fa8ce6c3166ef56c6a1b381b640"
   integrity sha512-DOBOK255wfQxguUta2INKkzPj6AIS6iafZYiYmHn6W3pHlycSRRlvWKCfLDG10fXfLWqE3DJHgRUOyJYmARa7g==
@@ -11922,6 +11922,11 @@ worker-rpc@^0.1.0:
   integrity sha512-P1WjMrUB3qgJNI9jfmpZ/htmBEjFh//6l/5y8SD9hg1Ef5zTTVVoRjTrTEzPrNBQvmhMxkoTsjOXN10GWU7aCg==
   dependencies:
     microevent.ts "~0.1.1"
+
+wouter@^2.7.4:
+  version "2.7.4"
+  resolved "https://registry.yarnpkg.com/wouter/-/wouter-2.7.4.tgz#d528122cacf6e9805d7b953bbddfb90226850977"
+  integrity sha512-shJIsHR+gcn69L2zR+0eKquOvAcjfIEdhzf8iAP502DlrAwg5lO2Q90DqIvXryNz/mk1fe2crTB40ZHXjoF1Bg==
 
 wrap-ansi@^5.1.0:
   version "5.1.0"
