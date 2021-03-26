@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/minsk/static/css/main.c2340bc3.chunk.css",
-    "main.js": "/minsk/static/js/main.4aa1a2f1.chunk.js",
-    "main.js.map": "/minsk/static/js/main.4aa1a2f1.chunk.js.map",
-    "runtime-main.js": "/minsk/static/js/runtime-main.93fdb82d.js",
-    "runtime-main.js.map": "/minsk/static/js/runtime-main.93fdb82d.js.map",
-    "static/css/2.37df512d.chunk.css": "/minsk/static/css/2.37df512d.chunk.css",
-    "static/js/2.f4b29716.chunk.js": "/minsk/static/js/2.f4b29716.chunk.js",
-    "static/js/2.f4b29716.chunk.js.map": "/minsk/static/js/2.f4b29716.chunk.js.map",
+    "main.js": "/minsk/static/js/main.4ff2fd5d.chunk.js",
+    "main.js.map": "/minsk/static/js/main.4ff2fd5d.chunk.js.map",
+    "runtime-main.js": "/minsk/static/js/runtime-main.e7c6b876.js",
+    "runtime-main.js.map": "/minsk/static/js/runtime-main.e7c6b876.js.map",
+    "static/css/2.7a2719f4.chunk.css": "/minsk/static/css/2.7a2719f4.chunk.css",
+    "static/js/2.53b233f5.chunk.js": "/minsk/static/js/2.53b233f5.chunk.js",
+    "static/js/2.53b233f5.chunk.js.map": "/minsk/static/js/2.53b233f5.chunk.js.map",
     "static/css/3.0978f8b3.chunk.css": "/minsk/static/css/3.0978f8b3.chunk.css",
     "static/js/3.17f142e5.chunk.js": "/minsk/static/js/3.17f142e5.chunk.js",
     "static/js/3.17f142e5.chunk.js.map": "/minsk/static/js/3.17f142e5.chunk.js.map",
     "static/css/4.6fc04424.chunk.css": "/minsk/static/css/4.6fc04424.chunk.css",
-    "static/js/4.ea0da75f.chunk.js": "/minsk/static/js/4.ea0da75f.chunk.js",
-    "static/js/4.ea0da75f.chunk.js.map": "/minsk/static/js/4.ea0da75f.chunk.js.map",
+    "static/js/4.bb5cb593.chunk.js": "/minsk/static/js/4.bb5cb593.chunk.js",
+    "static/js/4.bb5cb593.chunk.js.map": "/minsk/static/js/4.bb5cb593.chunk.js.map",
     "0-5616x3744.jpeg": "/minsk/0-5616x3744.jpeg",
     "1-5616x3744.jpeg": "/minsk/1-5616x3744.jpeg",
     "10-2500x1667.jpeg": "/minsk/10-2500x1667.jpeg",
@@ -45,7 +45,7 @@
     "1025-4951x3301.jpeg": "/minsk/1025-4951x3301.jpeg",
     "index.html": "/minsk/index.html",
     "minsk106_v-fullhd.jpeg": "/minsk/minsk106_v-fullhd.jpeg",
-    "static/css/2.37df512d.chunk.css.map": "/minsk/static/css/2.37df512d.chunk.css.map",
+    "static/css/2.7a2719f4.chunk.css.map": "/minsk/static/css/2.7a2719f4.chunk.css.map",
     "static/css/3.0978f8b3.chunk.css.map": "/minsk/static/css/3.0978f8b3.chunk.css.map",
     "static/css/4.6fc04424.chunk.css.map": "/minsk/static/css/4.6fc04424.chunk.css.map",
     "static/css/main.c2340bc3.chunk.css.map": "/minsk/static/css/main.c2340bc3.chunk.css.map",
@@ -53,10 +53,10 @@
     "wp2307392.jpeg": "/minsk/wp2307392.jpeg"
   },
   "entrypoints": [
-    "static/js/runtime-main.93fdb82d.js",
+    "static/js/runtime-main.e7c6b876.js",
     "static/css/3.0978f8b3.chunk.css",
     "static/js/3.17f142e5.chunk.js",
     "static/css/main.c2340bc3.chunk.css",
-    "static/js/main.4aa1a2f1.chunk.js"
+    "static/js/main.4ff2fd5d.chunk.js"
   ]
 }
