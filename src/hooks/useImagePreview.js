@@ -8,7 +8,11 @@ export const useImagePreview = (image, onClose) => {
     return (
       image &&
       createPortal(
-        <ImagePreview image={image.image.src} onClose={onClose} />,
+        <ImagePreview
+          image={image.image.src}
+          text={image.text}
+          onClose={onClose}
+        />,
         document.body
       )
     );

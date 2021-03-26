@@ -25,15 +25,13 @@ const BlackPlaceholder = ({ children, onClose }) => {
 const s = {
   Container: styled.div`
     position: fixed;
-    height: 100%;
     width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     z-index: 1;
+    overflow-y: auto;
   `,
   CloseIconContainer: styled.div`
     position: fixed;
