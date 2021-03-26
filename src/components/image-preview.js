@@ -14,7 +14,7 @@ const ImagePreview = ({ image, onClose }) => {
       <s.CloseIconContainer onClick={onClose}>
         <CloseIcon />
       </s.CloseIconContainer>
-      <s.Preview src={image.url} alt="preview" onClick={handleImageClick} />
+      <s.Preview src={image} alt="preview" onClick={handleImageClick} />
     </s.Container>
   );
 };
@@ -46,7 +46,7 @@ const s = {
 };
 
 ImagePreview.propTypes = {
-  image: PropTypes.object.isRequired,
+  image: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 

@@ -1,5 +1,3 @@
-/* eslint-disable no-use-before-define */
-
 import { memo, useCallback, useMemo, useState } from "react";
 import { styled } from "@linaria/react";
 import { useRoute, Link } from "wouter";
@@ -9,6 +7,8 @@ import { GalleryTypes } from "constants/gallery-types";
 import { Routes } from "constants/routes";
 import { todayGalleryMock, yesterdayGalleryMock } from "./mocks";
 import BackIcon from "icons/back-icon.svg";
+import ImageLoading from "../../components/image-loading";
+import Image from "../../components/image";
 
 const galleries = {
   [GalleryTypes.TODAY]: todayGalleryMock,
@@ -37,16 +37,21 @@ const Gallery = () => {
       </s.BackIconContainer>
       {renderPreview()}
       <s.GalleryContainer>
-        {gallery.map((i) => (
-          <s.GalleryItemContainer key={i.id}>
-            <s.GalleryItem
-              alt={i.name}
-              src={i.url}
-              loading="eager"
-              onClick={handleImageClick(i)}
-            />
-            <s.GalleryItemText>{i.name}</s.GalleryItemText>
-          </s.GalleryItemContainer>
+        {gallery.map((img) => (
+          <ImageLoading
+            key={img.id}
+            image={img.image}
+            onClick={handleImageClick(img)}
+          >
+            {(src, error) => (
+              <Image
+                src={src}
+                alt={img.name}
+                text={error ?? img.name}
+                needShowText={!!error}
+              />
+            )}
+          </ImageLoading>
         ))}
       </s.GalleryContainer>
     </s.PageContainer>
@@ -77,27 +82,10 @@ const s = {
     overflow-y: hidden;
 
     width: 100%;
-    height: 80%;
+    height: 90%;
   `,
-  GalleryItemText: styled.span`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: all ease-in 300ms;
 
-    color: #fff;
-    font-size: 2rem;
-    opacity: 0;
-  `,
-  GalleryItemContainer: styled.div`
-    position: relative;
-
-    &:hover ${s.GalleryItemText} {
-      opacity: 1;
-    }
-  `,
-  GalleryItem: styled.img`
+  Img: styled.img`
     margin: 2em;
     transform: scale(1) translateZ(0) skewX(-5deg);
     transition: all ease-in 300ms;

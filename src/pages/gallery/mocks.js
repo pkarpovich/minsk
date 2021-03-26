@@ -1,305 +1,179 @@
+import img1 from "static/yesterday/0-5616x3744.jpeg";
+import img2 from "static/yesterday/1-5616x3744.jpeg";
+import img3 from "static/yesterday/10-2500x1667.jpeg";
+import img4 from "static/yesterday/100-2500x1656.jpeg";
+import img5 from "static/yesterday/101-2621x1747.jpeg";
+import img7 from "static/yesterday/102-4320x3240.jpeg";
+import img8 from "static/yesterday/1000-5626x3635.jpeg";
+import img9 from "static/yesterday/1001-5616x3744.jpeg";
+import img10 from "static/yesterday/1002-4312x2868.jpeg";
+import img11 from "static/yesterday/1003-1181x1772.jpeg";
+import img12 from "static/yesterday/1004-5616x3744.jpeg";
+import img13 from "static/yesterday/1005-5760x3840.jpeg";
+import img14 from "static/yesterday/1006-3000x2000.jpeg";
+import img15 from "static/yesterday/1008-5616x3744.jpeg";
+import img17 from "static/yesterday/1010-5184x3456.jpeg";
+import img18 from "static/yesterday/1011-5472x3648.jpeg";
+import img19 from "static/yesterday/1012-3973x2639.jpeg";
+import img20 from "static/yesterday/1013-4256x2832.jpeg";
+import img21 from "static/yesterday/1014-6016x4000.jpeg";
+import img22 from "static/yesterday/1015-6000x4000.jpeg";
+import img23 from "static/yesterday/1016-3844x2563.jpeg";
+import img24 from "static/yesterday/1018-3914x2935.jpeg";
+import img25 from "static/yesterday/1019-5472x3648.jpeg";
+import img26 from "static/yesterday/1020-4288x2848.jpeg";
+import img27 from "static/yesterday/1021-2048x1206.jpeg";
+import img28 from "static/yesterday/1022-6000x3376.jpeg";
+import img29 from "static/yesterday/1023-3955x2094.jpeg";
+import img30 from "static/yesterday/1024-1920x1280.jpeg";
+import img31 from "static/yesterday/1025-4951x3301.jpeg";
+
 export const todayGalleryMock = [
   {
     id: "0",
     name: "Alejandro Escamilla",
-    url: "https://picsum.photos/id/0/5616/3744",
+    image: img1,
   },
   {
     id: "1",
     name: "Alejandro Escamilla",
-    url: "https://picsum.photos/id/1/5616/3744",
+    image: img2,
   },
   {
     id: "10",
     name: "Paul Jarvis",
-    url: "https://picsum.photos/id/10/2500/1667",
+    image: img3,
   },
   {
     id: "100",
     name: "Tina Rataj",
-    url: "https://picsum.photos/id/100/2500/1656",
+    image: img4,
   },
   {
     id: "1000",
     name: "Lukas Budimaier",
-    url: "https://picsum.photos/id/1000/5626/3635",
+    image: img5,
   },
   {
     id: "1001",
     name: "Danielle MacInnes",
-    url: "https://picsum.photos/id/1001/5616/3744",
+    image: img8,
   },
   {
     id: "1003",
     name: "E+N Photographies",
-    url: "https://picsum.photos/id/1003/1181/1772",
+    image: img7,
   },
   {
     id: "1002",
     name: "NASA",
-    url: "https://picsum.photos/id/1002/4312/2868",
+    image: img9,
   },
   {
     id: "1004",
     name: "Greg Rakozy",
-    url: "https://picsum.photos/id/1004/5616/3744",
+    image: img10,
   },
   {
     id: "1005",
     name: "Matthew Wiebe",
-    url: "https://picsum.photos/id/1005/5760/3840",
+    image: img11,
   },
   {
     id: "1006",
     name: "Vladimir Kudinov",
-    url: "https://picsum.photos/id/1006/3000/2000",
+    image: img12,
   },
   {
     id: "1008",
     name: "Benjamin Combs",
-    url: "https://picsum.photos/id/1008/5616/3744",
+    image: img13,
   },
   {
     id: "101",
     name: "Christian Bardenhorst",
-    url: "https://picsum.photos/id/101/2621/1747",
+    image: img14,
   },
   {
     id: "1009",
     name: "Christopher Campbell",
-    url: "https://picsum.photos/id/1009/5000/7502",
-  },
-  {
-    id: "1010",
-    name: "Samantha Sophia",
-    url: "https://picsum.photos/id/1010/5184/3456",
+    image: img15,
   },
   {
     id: "1011",
     name: "Roberto Nickson",
-    url: "https://picsum.photos/id/1011/5472/3648",
+    image: img17,
   },
   {
     id: "1012",
     name: "Scott Webb",
-    url: "https://picsum.photos/id/1012/3973/2639",
+    image: img18,
   },
   {
     id: "1013",
     name: "Cayton Heath",
-    url: "https://picsum.photos/id/1013/4256/2832",
+    image: img19,
   },
   {
     id: "1014",
     name: "Oscar Keys",
-    url: "https://picsum.photos/id/1014/6016/4000",
+    image: img20,
   },
   {
     id: "1015",
     name: "Alexey Topolyanskiy",
-    url: "https://picsum.photos/id/1015/6000/4000",
+    image: img21,
   },
   {
     id: "1016",
     name: "Philippe Wuyts",
-    url: "https://picsum.photos/id/1016/3844/2563",
+    image: img22,
   },
   {
     id: "1018",
     name: "Andrew Ridley",
-    url: "https://picsum.photos/id/1018/3914/2935",
+    image: img23,
   },
   {
     id: "1019",
     name: "Patrick Fore",
-    url: "https://picsum.photos/id/1019/5472/3648",
+    image: img24,
   },
   {
     id: "102",
     name: "Ben Moore",
-    url: "https://picsum.photos/id/102/4320/3240",
+    image: img25,
   },
   {
     id: "1020",
     name: "Adam Willoughby-Knox",
-    url: "https://picsum.photos/id/1020/4288/2848",
+    image: img26,
   },
   {
     id: "1021",
     name: "Frances Gunn",
-    url: "https://picsum.photos/id/1021/2048/1206",
+    image: img27,
   },
   {
     id: "1022",
     name: "Vashishtha Jogi",
-    url: "https://picsum.photos/id/1022/6000/3376",
+    image: img28,
   },
   {
     id: "1023",
     name: "William Hook",
-    url: "https://picsum.photos/id/1023/3955/2094",
+    image: img29,
   },
   {
     id: "1024",
     name: "Мартин Тасев",
-    url: "https://picsum.photos/id/1024/1920/1280",
+    image: img30,
   },
   {
     id: "1025",
     name: "Matthew Wiebe",
-    url: "https://picsum.photos/id/1025/4951/3301",
+    image: img31,
   },
 ];
 
-export const yesterdayGalleryMock = [
-  {
-    id: "1025",
-    name: "Matthew Wiebe",
-    url: "https://picsum.photos/id/1025/4951/3301",
-  },
-  {
-    id: "1024",
-    name: "Мартин Тасев",
-    url: "https://picsum.photos/id/1024/1920/1280",
-  },
-  {
-    id: "1023",
-    name: "William Hook",
-    url: "https://picsum.photos/id/1023/3955/2094",
-  },
-  {
-    id: "1022",
-    name: "Vashishtha Jogi",
-    url: "https://picsum.photos/id/1022/6000/3376",
-  },
-  {
-    id: "1021",
-    name: "Frances Gunn",
-    url: "https://picsum.photos/id/1021/2048/1206",
-  },
-  {
-    id: "1020",
-    name: "Adam Willoughby-Knox",
-    url: "https://picsum.photos/id/1020/4288/2848",
-  },
-  {
-    id: "102",
-    name: "Ben Moore",
-    url: "https://picsum.photos/id/102/4320/3240",
-  },
-  {
-    id: "1019",
-    name: "Patrick Fore",
-    url: "https://picsum.photos/id/1019/5472/3648",
-  },
-  {
-    id: "1018",
-    name: "Andrew Ridley",
-    url: "https://picsum.photos/id/1018/3914/2935",
-  },
-  {
-    id: "1016",
-    name: "Philippe Wuyts",
-    url: "https://picsum.photos/id/1016/3844/2563",
-  },
-  {
-    id: "1015",
-    name: "Alexey Topolyanskiy",
-    url: "https://picsum.photos/id/1015/6000/4000",
-  },
-  {
-    id: "1014",
-    name: "Oscar Keys",
-    url: "https://picsum.photos/id/1014/6016/4000",
-  },
-  {
-    id: "1013",
-    name: "Cayton Heath",
-    url: "https://picsum.photos/id/1013/4256/2832",
-  },
-  {
-    id: "1012",
-    name: "Scott Webb",
-    url: "https://picsum.photos/id/1012/3973/2639",
-  },
-  {
-    id: "1011",
-    name: "Roberto Nickson",
-    url: "https://picsum.photos/id/1011/5472/3648",
-  },
-  {
-    id: "1010",
-    name: "Samantha Sophia",
-    url: "https://picsum.photos/id/1010/5184/3456",
-  },
-  {
-    id: "101",
-    name: "Christian Bardenhorst",
-    url: "https://picsum.photos/id/101/2621/1747",
-  },
-  {
-    id: "1009",
-    name: "Christopher Campbell",
-    url: "https://picsum.photos/id/1009/5000/7502",
-  },
-  {
-    id: "1008",
-    name: "Benjamin Combs",
-    url: "https://picsum.photos/id/1008/5616/3744",
-  },
-  {
-    id: "1006",
-    name: "Vladimir Kudinov",
-    url: "https://picsum.photos/id/1006/3000/2000",
-  },
-  {
-    id: "1005",
-    name: "Matthew Wiebe",
-    url: "https://picsum.photos/id/1005/5760/3840",
-  },
-  {
-    id: "1004",
-    name: "Greg Rakozy",
-    url: "https://picsum.photos/id/1004/5616/3744",
-  },
-  {
-    id: "1003",
-    name: "E+N Photographies",
-    url: "https://picsum.photos/id/1003/1181/1772",
-  },
-  {
-    id: "1002",
-    name: "NASA",
-    url: "https://picsum.photos/id/1002/4312/2868",
-  },
-  {
-    id: "1001",
-    name: "Danielle MacInnes",
-    url: "https://picsum.photos/id/1001/5616/3744",
-  },
-  {
-    id: "1000",
-    name: "Lukas Budimaier",
-    url: "https://picsum.photos/id/1000/5626/3635",
-  },
-  {
-    id: "100",
-    name: "Tina Rataj",
-    url: "https://picsum.photos/id/100/2500/1656",
-  },
-  {
-    id: "10",
-    name: "Paul Jarvis",
-    url: "https://picsum.photos/id/10/2500/1667",
-  },
-  {
-    id: "1",
-    name: "Alejandro Escamilla",
-    url: "https://picsum.photos/id/1/5616/3744",
-  },
-  {
-    id: "0",
-    name: "Alejandro Escamilla",
-    url: "https://picsum.photos/id/0/5616/3744",
-  },
-];
+export const yesterdayGalleryMock = [...todayGalleryMock].reverse();

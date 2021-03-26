@@ -8,6 +8,7 @@ import { GalleryTypes } from "constants/gallery-types";
 
 import bgLeft from "static/wp2307392.jpeg";
 import bgRight from "static/minsk106_v-fullhd.jpeg";
+import ImageLoading from "../../components/image-loading";
 
 const Home = () => {
   const [, setLocation] = useLocation();
@@ -25,23 +26,31 @@ const Home = () => {
       <s.LinkContainer>
         <s.Label href={""}>Минск</s.Label>
       </s.LinkContainer>
-      <s.Img
-        bg={`url(${bgLeft})`}
-        width={65}
-        isLeft={true}
-        onClick={handleImageClick(`/gallery/${GalleryTypes.YESTERDAY}`)}
-      >
-        <s.Label>Вчера</s.Label>
-      </s.Img>
-      <s.Img
-        bg={`url(${bgRight})`}
-        width={65}
-        left={35}
-        isLeft={false}
-        onClick={handleImageClick(`/gallery/${GalleryTypes.TODAY}`)}
-      >
-        <s.Label>Сегодня</s.Label>
-      </s.Img>
+      <ImageLoading image={bgLeft}>
+        {(src) => (
+          <s.Img
+            bg={`url(${src})`}
+            width={65}
+            isLeft={true}
+            onClick={handleImageClick(`/gallery/${GalleryTypes.YESTERDAY}`)}
+          >
+            <s.Label>Вчера</s.Label>
+          </s.Img>
+        )}
+      </ImageLoading>
+      <ImageLoading image={bgRight}>
+        {(src) => (
+          <s.Img
+            bg={`url(${src})`}
+            width={65}
+            left={35}
+            isLeft={false}
+            onClick={handleImageClick(`/gallery/${GalleryTypes.TODAY}`)}
+          >
+            <s.Label>Вчера</s.Label>
+          </s.Img>
+        )}
+      </ImageLoading>
     </s.Container>
   );
 };
