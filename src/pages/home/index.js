@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
 
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
+import { createPortal } from "react-dom";
 import { styled } from "@linaria/react";
 import { useLocation } from "wouter";
 
@@ -9,9 +10,11 @@ import { GalleryTypes } from "constants/gallery-types";
 import bgLeft from "static/wp2307392.jpeg";
 import bgRight from "static/minsk106_v-fullhd.jpeg";
 import ImageLoading from "../../components/image-loading";
+import CityInfo from "../../components/city-info";
 
 const Home = () => {
   const [, setLocation] = useLocation();
+  const [needShowCityInfo, toggleCityInfo] = useState(false);
 
   const handleImageClick = useCallback(
     (newUrl) => (e) => {
@@ -21,10 +24,21 @@ const Home = () => {
     [setLocation]
   );
 
+  const handleOpenCityInfo = useCallback(() => toggleCityInfo(true), []);
+  const handleCloseCityInfo = useCallback(() => toggleCityInfo(false), []);
+
+  const renderCityInfo = useCallback(() => {
+    return (
+      needShowCityInfo &&
+      createPortal(<CityInfo onClose={handleCloseCityInfo} />, document.body)
+    );
+  }, [handleCloseCityInfo, needShowCityInfo]);
+
   return (
     <s.Container>
+      {renderCityInfo()}
       <s.LinkContainer>
-        <s.Label href={""}>Минск</s.Label>
+        <s.Label onClick={handleOpenCityInfo}>Минск</s.Label>
       </s.LinkContainer>
       <ImageLoading image={bgLeft}>
         {(src) => (
@@ -47,7 +61,7 @@ const Home = () => {
             isLeft={false}
             onClick={handleImageClick(`/gallery/${GalleryTypes.TODAY}`)}
           >
-            <s.Label>Вчера</s.Label>
+            <s.Label>Сегодня</s.Label>
           </s.Img>
         )}
       </ImageLoading>
