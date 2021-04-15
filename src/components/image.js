@@ -4,10 +4,10 @@ import { memo } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@linaria/react";
 
-const Image = ({ src, alt, text, needShowText = false }) => {
+const Image = ({ src, alt, text, needShowText = false, onClick }) => {
   return (
     <s.GalleryItemContainer>
-      <s.Img src={src} alt={alt} />
+      <s.Img src={src} alt={alt} onClick={onClick} />
       <s.GalleryItemText needShowText={needShowText}>{text}</s.GalleryItemText>
     </s.GalleryItemContainer>
   );

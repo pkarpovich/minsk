@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { styled } from "@linaria/react";
 import { useRoute, Link } from "wouter";
 
@@ -17,7 +17,15 @@ const galleries = {
 
 const Gallery = () => {
   const [, { id }] = useRoute(Routes.GALLERY);
-  const gallery = useMemo(() => galleries[id] ?? [], [id]);
+  const [gallery, setGallery] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      `/api/gallery?type=${id === GalleryTypes.TODAY ? "Сегодня" : "Вчера"}`
+    )
+      .then((resp) => resp.json())
+      .then(setGallery);
+  }, []);
 
   const [image, setImage] = useState(null);
   const handleClosePreview = useCallback(() => {
@@ -38,20 +46,13 @@ const Gallery = () => {
       {renderPreview()}
       <s.GalleryContainer>
         {gallery.map((img) => (
-          <ImageLoading
-            key={img.id}
-            image={img.image}
+          <Image
+            key={img._id}
+            src={img.preview}
+            text={img.title}
+            alt={img.title}
             onClick={handleImageClick(img)}
-          >
-            {(src, error) => (
-              <Image
-                src={src}
-                alt={img.name}
-                text={error ?? img.name}
-                needShowText={!!error}
-              />
-            )}
-          </ImageLoading>
+          />
         ))}
       </s.GalleryContainer>
     </s.PageContainer>

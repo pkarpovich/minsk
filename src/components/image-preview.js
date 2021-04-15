@@ -3,17 +3,37 @@ import { styled } from "@linaria/react";
 import PropTypes from "prop-types";
 
 import BlackPlaceholder from "./black-placeholder";
+import { Types } from "../pages/admin";
 
-const ImagePreview = ({ image, text = <></>, onClose }) => {
+const ImagePreview = ({ content = [], title, onClose }) => {
   const handleImageClick = useCallback((e) => {
     e.stopPropagation();
   }, []);
 
   return (
     <BlackPlaceholder onClose={onClose}>
-      <s.Container>
-        <s.Image src={image} alt="preview" onClick={handleImageClick} />
-        {text}
+      <s.Container onClick={handleImageClick}>
+        <s.Article>{title}</s.Article>
+        {content.map((c) => {
+          if (!c.value) {
+            return <div />;
+          }
+
+          switch (c.type) {
+            case Types.TEXT: {
+              return <s.Article key={`${c.id}_preview`}>{c.value}</s.Article>;
+            }
+            case Types.IMAGE: {
+              console.log(c.value);
+              return (
+                <s.Image key={`${c.id}_preview`} src={c.value} alt="preview" />
+              );
+            }
+            default: {
+              return <div />;
+            }
+          }
+        })}
       </s.Container>
     </BlackPlaceholder>
   );

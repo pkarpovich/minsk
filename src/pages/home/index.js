@@ -40,31 +40,36 @@ const Home = () => {
       <s.LinkContainer>
         <s.Label onClick={handleOpenCityInfo}>Минск</s.Label>
       </s.LinkContainer>
-      <ImageLoading image={bgLeft}>
-        {(src) => (
-          <s.Img
-            bg={`url(${src})`}
-            width={65}
-            isLeft={true}
-            onClick={handleImageClick(`/gallery/${GalleryTypes.YESTERDAY}`)}
-          >
-            <s.Label>Вчера</s.Label>
-          </s.Img>
-        )}
-      </ImageLoading>
-      <ImageLoading image={bgRight}>
-        {(src) => (
-          <s.Img
-            bg={`url(${src})`}
-            width={65}
-            left={35}
-            isLeft={false}
-            onClick={handleImageClick(`/gallery/${GalleryTypes.TODAY}`)}
-          >
-            <s.Label>Сегодня</s.Label>
-          </s.Img>
-        )}
-      </ImageLoading>
+      <div>
+        <s.LabelContainer>
+          <s.Label>gdfgdfgdfgdfgd</s.Label>
+        </s.LabelContainer>
+        <ImageLoading
+          image={bgLeft}
+          onClick={handleImageClick(`/gallery/${GalleryTypes.YESTERDAY}`)}
+        >
+          {(src) => (
+            <s.Img bg={`url(${src})`} width={65} isLeft={true}>
+              <s.Label>Вчера</s.Label>
+            </s.Img>
+          )}
+        </ImageLoading>
+      </div>
+      <div>
+        <s.LabelContainer>
+          <s.Label>Минск</s.Label>
+        </s.LabelContainer>
+        <ImageLoading
+          image={bgRight}
+          onClick={handleImageClick(`/gallery/${GalleryTypes.TODAY}`)}
+        >
+          {(src) => (
+            <s.Img bg={`url(${src})`} width={65} left={35} isLeft={false}>
+              <s.Label>Сегодня</s.Label>
+            </s.Img>
+          )}
+        </ImageLoading>
+      </div>
     </s.Container>
   );
 };
@@ -77,6 +82,13 @@ const s = {
     display: flex;
     justify-content: space-between;
     overflow: hidden;
+  `,
+  LabelContainer: styled.div`
+    display: flex;
+    height: 30%;
+    width: 50vw;
+    justify-content: center;
+    align-items: center;
   `,
   Label: styled.span`
     font-size: 3rem;
@@ -92,9 +104,9 @@ const s = {
   `,
   Img: styled.div`
     width: ${(props) => props.width ?? "50"}%;
-    height: 100%;
+    height: 70%;
     position: fixed;
-    top: 0;
+    top: 30%;
     left: ${(props) => props.left ?? 0}%;
     background: ${(props) => props.bg} no-repeat center center fixed;
     background-size: cover;
@@ -112,6 +124,8 @@ const s = {
 
     &:hover {
       transform: scale(1.3) translateZ(0);
+      height: 61%;
+      top: 39%;
     }
 
     &:hover ${s.Label} {
