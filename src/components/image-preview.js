@@ -1,68 +1,73 @@
-import { memo, useCallback } from "react";
-import { styled } from "@linaria/react";
+import { memo, useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import BlackPlaceholder from "./black-placeholder";
-import { Types } from "../pages/admin";
+import PostPreview, { s } from "./post-preview";
+import { Categories } from "../pages/admin";
 
-const ImagePreview = ({ content = [], title, onClose }) => {
+const ImagePreview = ({
+  link,
+  type,
+  gallery,
+  content = [],
+  title,
+  onClose,
+}) => {
+  const [state, setState] = useState({
+    link: "",
+    type: "",
+    content: [],
+    title: "",
+  });
+
+  useEffect(() => {
+    setState({
+      link,
+      type,
+      content,
+      title,
+    });
+  }, [content, link, title, type]);
+
   const handleImageClick = useCallback((e) => {
     e.stopPropagation();
   }, []);
 
+  const handleClick = useCallback(
+    (e) => {
+      e.stopPropagation();
+      const item = gallery.find((g) => g.id === state.link);
+
+      setState(item);
+    },
+    [gallery, state.link]
+  );
+
   return (
     <BlackPlaceholder onClose={onClose}>
-      <s.Container onClick={handleImageClick}>
-        <s.Article>{title}</s.Article>
-        {content.map((c) => {
-          if (!c.value) {
-            return <div />;
-          }
-
-          switch (c.type) {
-            case Types.TEXT: {
-              return <s.Article key={`${c.id}_preview`}>{c.value}</s.Article>;
-            }
-            case Types.IMAGE: {
-              console.log(c.value);
-              return (
-                <s.Image key={`${c.id}_preview`} src={c.value} alt="preview" />
-              );
-            }
-            default: {
-              return <div />;
-            }
-          }
-        })}
-      </s.Container>
+      <PostPreview
+        title={state.title}
+        content={state.content}
+        onClick={handleImageClick}
+      />
+      <div
+        style={{ display: "flex", justifyContent: "center", cursor: "pointer" }}
+      >
+        <s.Article onClick={handleClick}>
+          {state.title}{" "}
+          {state.type === Categories.TODAY
+            ? Categories.YESTERDAY.toLowerCase()
+            : Categories.TODAY.toLowerCase()}
+        </s.Article>
+      </div>
     </BlackPlaceholder>
   );
 };
 
-export const s = {
-  Container: styled.div`
-    //height: 100%;
-    //max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 3em;
-    overflow-y: auto;
-  `,
-  Image: styled.img`
-    max-height: 70%;
-    max-width: 70%;
-    margin-top: 2em;
-    margin-bottom: 2em;
-  `,
-  Article: styled.div`
-    font-size: 2rem;
-    color: #fff;
-  `,
-};
-
 ImagePreview.propTypes = {
+  link: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  gallery: PropTypes.array.isRequired,
   image: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
 };

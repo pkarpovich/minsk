@@ -5,12 +5,11 @@ import { createPortal } from "react-dom";
 import { styled } from "@linaria/react";
 import { useLocation } from "wouter";
 
-import { GalleryTypes } from "constants/gallery-types";
-
 import bgLeft from "static/wp2307392.jpeg";
 import bgRight from "static/minsk106_v-fullhd.jpeg";
 import ImageLoading from "../../components/image-loading";
 import CityInfo from "../../components/city-info";
+import { Categories } from "../admin";
 
 const Home = () => {
   const [, setLocation] = useLocation();
@@ -46,7 +45,7 @@ const Home = () => {
         </s.LabelContainer>
         <ImageLoading
           image={bgLeft}
-          onClick={handleImageClick(`/gallery/${GalleryTypes.YESTERDAY}`)}
+          onClick={handleImageClick(`/gallery/${Categories.YESTERDAY}`)}
         >
           {(src) => (
             <s.Img bg={`url(${src})`} width={65} isLeft={true}>
@@ -61,7 +60,7 @@ const Home = () => {
         </s.LabelContainer>
         <ImageLoading
           image={bgRight}
-          onClick={handleImageClick(`/gallery/${GalleryTypes.TODAY}`)}
+          onClick={handleImageClick(`/gallery/${Categories.TODAY}`)}
         >
           {(src) => (
             <s.Img bg={`url(${src})`} width={65} left={35} isLeft={false}>

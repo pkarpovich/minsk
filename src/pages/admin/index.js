@@ -6,11 +6,16 @@ import { styled } from "@linaria/react";
 
 import { Routes } from "constants/routes";
 import { config } from "config/config";
-import { s as imagePreviewStyles } from "components/image-preview";
+import PostPreview from "../../components/post-preview";
 
 export const Types = {
   IMAGE: "IMAGE",
   TEXT: "TEXT",
+};
+
+export const Categories = {
+  TODAY: "Сегодня",
+  YESTERDAY: "Вчера",
 };
 
 const defaultContentItem = (type) => ({
@@ -32,6 +37,14 @@ const Admin = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Сегодня");
   const [content, setContent] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [link, setLink] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/gallery")
+      .then((resp) => resp.json())
+      .then((data) => setPosts(data));
+  }, []);
 
   const handleAddContentButtonClick = useCallback(
     (type) => () => {
@@ -45,13 +58,25 @@ const Admin = () => {
   }, []);
 
   const handleImageUpload = useCallback(
-    (id) => ([value]) => {
+    (id, type) => ([value]) => {
       const reader = new FileReader();
       reader.readAsDataURL(value);
       reader.onload = function (e) {
         setContent((content) =>
           content.map((c) =>
-            c.id === id ? { ...c, value: e.target.result } : c
+            c.id === id
+              ? {
+                  ...c,
+                  value: [
+                    ...(c.value?.filter?.((c) => c.type !== type) ?? []),
+                    {
+                      id: nanoid(),
+                      value: e.target.result,
+                      type,
+                    },
+                  ],
+                }
+              : c
           )
         );
       };
@@ -71,6 +96,15 @@ const Admin = () => {
     setType(e.target.value);
   }, []);
 
+  const handleRemovePostsButtonClick = useCallback(() => {
+    setLocation(`/admin/${config.ADMIN_PASS}/remove`);
+  }, [setLocation]);
+
+  const handleLinkChange = useCallback((e) => {
+    setLink(e.target.value);
+  }, []);
+  console.log(link);
+
   const handleClick = useCallback(async () => {
     await fetch(`/api/gallery`, {
       method: "POST",
@@ -81,86 +115,96 @@ const Admin = () => {
       body: JSON.stringify({
         title,
         type,
+        link,
         content,
       }),
     });
-  }, [content, title, type]);
+  }, [content, link, title, type]);
 
   return (
-    <s.PageContainer>
-      <s.ContentContainer>
-        <span>Title: </span>
-        <select value={type} onChange={handleTypeChange}>
-          <option>Вчера</option>
-          <option>Сегодня</option>
-        </select>
-        <input type="text" value={title} onChange={handleTitleChange} />
-        <div>
-          <button onClick={handleAddContentButtonClick(Types.IMAGE)}>
-            Add image
-          </button>
-          <button onClick={handleAddContentButtonClick(Types.TEXT)}>
-            Add text
-          </button>
-        </div>
-        <div>
-          {content.map((c) => {
-            switch (c.type) {
-              case Types.TEXT: {
-                return (
-                  <textarea
-                    key={c.id}
-                    value={c.value}
-                    onChange={handleTextChange(c.id)}
-                  />
-                );
-              }
-              case Types.IMAGE: {
-                return (
-                  <ImageUploader
-                    key={c.id}
-                    withIcon={true}
-                    buttonText="Choose images"
-                    onChange={handleImageUpload(c.id)}
-                    imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-                    maxFileSize={5242880}
-                  />
-                );
-              }
-              default: {
-                return <div />;
-              }
-            }
-          })}
-        </div>
-        <div>
-          <input type="button" onClick={handleClick} value="Add" />
-        </div>
-      </s.ContentContainer>
-      <s.ContentContainer>
-        <s.Preview>
-          <imagePreviewStyles.Container>
+    <>
+      <s.ButtonsContainer>
+        <s.Button onClick={handleRemovePostsButtonClick}>
+          Удаление постов
+        </s.Button>
+      </s.ButtonsContainer>
+      <s.PageContainer>
+        <s.LabelsContainer>Настройка поста</s.LabelsContainer>
+        <s.LabelsContainer>Предпросмотр</s.LabelsContainer>
+      </s.PageContainer>
+      <s.PageContainer>
+        <s.ContentContainer>
+          <s.Box>
+            <s.Label>Имя поста: </s.Label>
+            <s.Input type="text" value={title} onChange={handleTitleChange} />
+          </s.Box>
+          <s.Box>
+            <s.Label>Категория поста: </s.Label>
+            <s.Select value={type} onChange={handleTypeChange}>
+              <option>{Categories.TODAY}</option>
+              <option>{Categories.YESTERDAY}</option>
+            </s.Select>
+          </s.Box>
+          <s.Box>
+            <s.Label>Связать с другим:</s.Label>
+            <s.Select value={link} onChange={handleLinkChange}>
+              {posts.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.title} ({p.type})
+                </option>
+              ))}
+            </s.Select>
+          </s.Box>
+          <s.Box>
+            <s.Label>Контент: </s.Label>
+            <div style={{ display: "flex" }}>
+              <s.Box>
+                <s.Button onClick={handleAddContentButtonClick(Types.IMAGE)}>
+                  Добавить картинку
+                </s.Button>
+              </s.Box>
+              <s.Box>
+                <s.Button onClick={handleAddContentButtonClick(Types.TEXT)}>
+                  Добавить текст
+                </s.Button>
+              </s.Box>
+            </div>
+          </s.Box>
+          <div>
             {content.map((c) => {
-              if (!c.value) {
-                return <div />;
-              }
-
               switch (c.type) {
                 case Types.TEXT: {
                   return (
-                    <imagePreviewStyles.Article key={`${c.id}_preview`}>
-                      {c.value}
-                    </imagePreviewStyles.Article>
+                    <s.Textarea
+                      key={c.id}
+                      value={c.value}
+                      rows={10}
+                      onChange={handleTextChange(c.id)}
+                    />
                   );
                 }
                 case Types.IMAGE: {
-                  console.log(c.value);
                   return (
-                    <imagePreviewStyles.Image
-                      key={`${c.id}_preview`}
-                      src={c.value}
-                      alt="preview"
-                    />
+                    <s.Flex>
+                      <s.ImageUploader
+                        key={c.id}
+                        withIcon={false}
+                        withPreview={false}
+                        buttonText="Картинка сегодня"
+                        onChange={handleImageUpload(c.id, Categories.TODAY)}
+                        imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                        maxFileSize={5242880}
+                      />
+                      <s.ImageUploader
+                        key={c.id}
+                        withIcon={false}
+                        withPreview={false}
+                        buttonText="Картинка вчера"
+                        onChange={handleImageUpload(c.id, Categories.YESTERDAY)}
+                        imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                        maxFileSize={5242880}
+                      />
+                    </s.Flex>
                   );
                 }
                 default: {
@@ -168,23 +212,111 @@ const Admin = () => {
                 }
               }
             })}
-          </imagePreviewStyles.Container>
-        </s.Preview>
-      </s.ContentContainer>
-    </s.PageContainer>
+          </div>
+          <s.Box>
+            <s.Button onClick={handleClick}>Добавить пост</s.Button>
+          </s.Box>
+        </s.ContentContainer>
+        <s.ContentContainer>
+          <PostPreview needBackground={true} title={title} content={content} />
+        </s.ContentContainer>
+      </s.PageContainer>
+    </>
   );
 };
 
-const s = {
+export const s = {
   PageContainer: styled.div`
     display: flex;
   `,
   ContentContainer: styled.div`
     width: 50%;
     overflow-y: auto;
+    padding: 30px;
+    margin: 30px;
+    border: 1px solid #000;
+  `,
+  ButtonsContainer: styled.div`
+    margin-top: 30px;
+    margin-left: 30px;
+  `,
+  LabelsContainer: styled.div`
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
   `,
   Preview: styled.div`
     background-color: rgba(0, 0, 0, 0.9);
+  `,
+  Input: styled.input`
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ddd;
+    background: #eee;
+    outline: none;
+    font: inherit;
+  `,
+  Select: styled.select`
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ddd;
+    background: #eee;
+    outline: none;
+    font: inherit;
+  `,
+  Label: styled.label`
+    font-size: 21px;
+  `,
+  Button: styled.button`
+    background-color: ${(props) => props.color ?? "green"};
+    border: 1px solid ${(props) => props.color ?? "green"};
+    color: #fff;
+    width: 200px;
+    height: 40px;
+    padding: 6px 20px;
+    font-size: 16px;
+    border-radius: 40px;
+    outline: none;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    user-select: none;
+    font-family: sans-serif;
+    margin-bottom: 1em;
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+
+    &:hover {
+      outline: none;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+  `,
+  Textarea: styled.textarea`
+    width: 100%;
+    border: 1px solid #ddd;
+    background: #eee;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  `,
+  ImageUploader: styled(ImageUploader)`
+    width: 50%;
+    margin: 5px;
+  `,
+  Box: styled.div`
+    margin: 10px;
+  `,
+  Flex: styled.div`
+    display: flex;
+    margin: 5px;
   `,
 };
 

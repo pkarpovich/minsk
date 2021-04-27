@@ -5,24 +5,16 @@ import { useRoute, Link } from "wouter";
 import { useImagePreview } from "hooks/useImagePreview";
 import { GalleryTypes } from "constants/gallery-types";
 import { Routes } from "constants/routes";
-import { todayGalleryMock, yesterdayGalleryMock } from "./mocks";
 import BackIcon from "icons/back-icon.svg";
 import ImageLoading from "../../components/image-loading";
 import Image from "../../components/image";
-
-const galleries = {
-  [GalleryTypes.TODAY]: todayGalleryMock,
-  [GalleryTypes.YESTERDAY]: yesterdayGalleryMock,
-};
 
 const Gallery = () => {
   const [, { id }] = useRoute(Routes.GALLERY);
   const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
-    fetch(
-      `/api/gallery?type=${id === GalleryTypes.TODAY ? "Сегодня" : "Вчера"}`
-    )
+    fetch(`/api/gallery?type`)
       .then((resp) => resp.json())
       .then(setGallery);
   }, []);
@@ -32,7 +24,7 @@ const Gallery = () => {
     setImage(null);
   }, []);
 
-  const { renderPreview } = useImagePreview(image, handleClosePreview);
+  const { renderPreview } = useImagePreview(image, gallery, handleClosePreview);
 
   const handleImageClick = useCallback((img) => () => setImage(img), []);
 
@@ -45,15 +37,17 @@ const Gallery = () => {
       </s.BackIconContainer>
       {renderPreview()}
       <s.GalleryContainer>
-        {gallery.map((img) => (
-          <Image
-            key={img._id}
-            src={img.preview}
-            text={img.title}
-            alt={img.title}
-            onClick={handleImageClick(img)}
-          />
-        ))}
+        {gallery
+          .filter((g) => encodeURI(g.type) === id)
+          .map((img) => (
+            <Image
+              key={img.id}
+              src={img.preview}
+              text={img.title}
+              alt={img.title}
+              onClick={handleImageClick(img)}
+            />
+          ))}
       </s.GalleryContainer>
     </s.PageContainer>
   );

@@ -24,7 +24,7 @@ const s = {
   GalleryItemText: styled.span`
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 27%;
     text-align: center;
     transform: translate(-50%, -50%);
     transition: all ease-in 300ms;
@@ -35,10 +35,11 @@ const s = {
   `,
   Img: styled.img`
     margin: 2em;
-    transform: scale(1) translateZ(0) skewX(-5deg);
+    transform: scale(1) translateZ(0);
     transition: all ease-in 300ms;
     cursor: pointer;
     width: 600px;
+    max-height: 400px;
 
     &:hover {
       transform: scale(1.1) translateZ(0);
