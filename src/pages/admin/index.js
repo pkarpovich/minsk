@@ -30,7 +30,7 @@ const Admin = () => {
 
   useEffect(() => {
     if (pass !== config.ADMIN_PASS) {
-      setLocation(Routes.HOME);
+      setLocation(Routes.NAVIGATION);
     }
   });
 

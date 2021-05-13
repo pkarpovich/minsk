@@ -31,7 +31,7 @@ const Gallery = () => {
   return (
     <s.PageContainer>
       <s.BackIconContainer>
-        <Link href={Routes.HOME}>
+        <Link href={Routes.NAVIGATION}>
           <BackIcon />
         </Link>
       </s.BackIconContainer>
