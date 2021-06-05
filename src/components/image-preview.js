@@ -1,5 +1,6 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { YMaps, Map, Placemark } from "react-yandex-maps";
 
 import BlackPlaceholder from "./black-placeholder";
 import PostPreview, { s } from "./post-preview";
@@ -11,6 +12,8 @@ const ImagePreview = ({
   gallery,
   content = [],
   title,
+  longitude,
+  latitude,
   onClose,
 }) => {
   const [state, setState] = useState({
@@ -50,6 +53,17 @@ const ImagePreview = ({
         content={state.content}
         onClick={handleImageClick}
       />
+      <s.MapContainer>
+        <YMaps>
+          <Map
+            width={800}
+            height={600}
+            defaultState={{ center: [53.9006, 27.559], zoom: 13 }}
+          >
+            <Placemark geometry={[longitude, latitude]} />
+          </Map>
+        </YMaps>
+      </s.MapContainer>
       <div
         style={{ display: "flex", justifyContent: "center", cursor: "pointer" }}
       >
@@ -72,4 +86,4 @@ ImagePreview.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default memo(ImagePreview);
+export default ImagePreview;

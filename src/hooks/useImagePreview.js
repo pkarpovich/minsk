@@ -12,6 +12,8 @@ export const useImagePreview = (image, gallery, onClose) => {
           link={image.link}
           type={image.type}
           title={image.title}
+          longitude={image.longitude}
+          latitude={image.latitude}
           content={image.content}
           gallery={gallery}
           onClose={onClose}

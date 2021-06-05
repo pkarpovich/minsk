@@ -44,6 +44,10 @@ export const s = {
     font-size: 2rem;
     color: #fff;
   `,
+  MapContainer: styled.div`
+    display: flex;
+    justify-content: center;
+  `,
 };
 
 PostPreview.propTypes = {

@@ -8,6 +8,8 @@ import { Routes } from "constants/routes";
 import BackIcon from "icons/back-icon.svg";
 import ImageLoading from "../../components/image-loading";
 import Image from "../../components/image";
+import { ImageMap } from "@qiuz/react-image-map";
+import MapImage from "static/images/map.jpeg";
 
 const Gallery = () => {
   const [, { id }] = useRoute(Routes.GALLERY);
@@ -28,6 +30,23 @@ const Gallery = () => {
 
   const handleImageClick = useCallback((img) => () => setImage(img), []);
 
+  const areas = useMemo(() => {
+    return gallery
+      .filter((g) => encodeURI(g.type) === id)
+      .map((img) => ({
+        left: `${img.left}%`,
+        top: `${img.top}%`,
+        render: () => (
+          <Image
+            key={img.id}
+            src={img.preview}
+            style={{ width: "130px" }}
+            onClick={handleImageClick(img)}
+          />
+        ),
+      }));
+  }, [gallery, handleImageClick, id]);
+
   return (
     <s.PageContainer>
       <s.BackIconContainer>
@@ -36,19 +55,25 @@ const Gallery = () => {
         </Link>
       </s.BackIconContainer>
       {renderPreview()}
-      <s.GalleryContainer>
-        {gallery
-          .filter((g) => encodeURI(g.type) === id)
-          .map((img) => (
-            <Image
-              key={img.id}
-              src={img.preview}
-              text={img.title}
-              alt={img.title}
-              onClick={handleImageClick(img)}
-            />
-          ))}
-      </s.GalleryContainer>
+      <ImageMap
+        className="usage-map"
+        src={MapImage.src}
+        map={areas}
+        onMapClick={() => {}}
+      />
+      {/*<s.GalleryContainer>*/}
+      {/*  {gallery*/}
+      {/*    .filter((g) => encodeURI(g.type) === id)*/}
+      {/*    .map((img) => (*/}
+      {/*      <Image*/}
+      {/*        key={img.id}*/}
+      {/*        src={img.preview}*/}
+      {/*        text={img.title}*/}
+      {/*        alt={img.title}*/}
+      {/*        onClick={handleImageClick(img)}*/}
+      {/*      />*/}
+      {/*    ))}*/}
+      {/*</s.GalleryContainer>*/}
     </s.PageContainer>
   );
 };

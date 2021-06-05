@@ -36,6 +36,10 @@ const Admin = () => {
 
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Сегодня");
+  const [left, setLeft] = useState(0);
+  const [top, setTop] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState(0);
   const [content, setContent] = useState([]);
   const [posts, setPosts] = useState([]);
   const [link, setLink] = useState(null);
@@ -55,6 +59,22 @@ const Admin = () => {
 
   const handleTitleChange = useCallback((e) => {
     setTitle(e.target.value);
+  }, []);
+
+  const handleTopChange = useCallback((e) => {
+    setTop(e.target.value);
+  }, []);
+
+  const handleLeftChange = useCallback((e) => {
+    setLeft(e.target.value);
+  }, []);
+
+  const handleLongitudeChange = useCallback((e) => {
+    setLongitude(e.target.value);
+  }, []);
+
+  const handleLatitudeChange = useCallback((e) => {
+    setLatitude(e.target.value);
   }, []);
 
   const handleImageUpload = useCallback(
@@ -114,12 +134,16 @@ const Admin = () => {
       },
       body: JSON.stringify({
         title,
+        left,
+        top,
         type,
         link,
         content,
+        longitude,
+        latitude,
       }),
     });
-  }, [content, link, title, type]);
+  }, [content, latitude, left, link, longitude, title, top, type]);
 
   return (
     <>
@@ -137,6 +161,30 @@ const Admin = () => {
           <s.Box>
             <s.Label>Имя поста: </s.Label>
             <s.Input type="text" value={title} onChange={handleTitleChange} />
+          </s.Box>
+          <s.Box>
+            <s.Label>Top: </s.Label>
+            <s.Input type="text" value={top} onChange={handleTopChange} />
+          </s.Box>
+          <s.Box>
+            <s.Label>Left: </s.Label>
+            <s.Input type="text" value={left} onChange={handleLeftChange} />
+          </s.Box>
+          <s.Box>
+            <s.Label>Longitude: </s.Label>
+            <s.Input
+              type="text"
+              value={longitude}
+              onChange={handleLongitudeChange}
+            />
+          </s.Box>
+          <s.Box>
+            <s.Label>Latitude: </s.Label>
+            <s.Input
+              type="text"
+              value={latitude}
+              onChange={handleLatitudeChange}
+            />
           </s.Box>
           <s.Box>
             <s.Label>Категория поста: </s.Label>
